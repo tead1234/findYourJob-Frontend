@@ -31,6 +31,7 @@ class KwansangApi {
 
     log("uploadUserProfileImage Start");
     if(kDebugMode){
+      await Future.delayed(Duration(seconds: 5));
       return ResultResponseDto("men", "doctor", "actor", "banker", "https://picsum.photos/id/64/200/200", "https://picsum.photos/id/275/200/200", "https://picsum.photos/id/364/200/200");
     }
     final response = await dio.post("/requestKwansang", data: formData);
