@@ -10,7 +10,7 @@ class ImagePicked extends HomeEvent {
 }
 
 class RadioClicked extends HomeEvent{
-  final String selectedValue;
+  final int selectedValue;
 
   RadioClicked(this.selectedValue);
 }
@@ -19,4 +19,7 @@ class AgreeCheckClicked extends HomeEvent{
   final bool selectedValue;
 
   AgreeCheckClicked(this.selectedValue);
+}
+
+class RequestClicked extends HomeEvent{
 }

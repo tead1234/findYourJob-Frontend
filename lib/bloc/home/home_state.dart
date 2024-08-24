@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 
 abstract class HomeState extends Equatable {
@@ -24,12 +26,12 @@ class ImageLoadFailure extends ImageState {}
 
 
 class RadioState extends HomeState{
-  final String selectedValue;
+  final List<bool> isSelected;
 
-  RadioState(this.selectedValue);
+  RadioState(this.isSelected);
 
   @override
-  List<Object> get props => [selectedValue];
+  List<Object> get props => [isSelected];
 }
 
 class AgreeState extends HomeState{
@@ -39,4 +41,19 @@ class AgreeState extends HomeState{
 
   @override
   List<Object> get props => [selectedValue];
+}
+
+class RequestState extends HomeState{
+  final String imgPath;
+  final Uint8List? imgBytes;
+  final String gender;
+  final bool agreeYn;
+
+  RequestState(this.imgPath,this.imgBytes,this.gender,this.agreeYn);
+
+  @override
+  List<Object> get props => [];
+
+  // @override
+  // List<Object> get props => [imgPath,gender,agreeYn];
 }
