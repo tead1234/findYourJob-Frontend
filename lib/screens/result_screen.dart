@@ -2,10 +2,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:kwansang/data/models/result_response_dto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ResultScreen extends StatelessWidget {
   final String imageUrl = 'https://www.google.com/imgres?q=%EA%B4%80%EC%83%81&imgurl=https%3A%2F%2Fi.namu.wiki%2Fi%2FJNmmvzr3JP1TMVGGFvckRVLS5t5Vef978NpmjEf0QSNh5db4sMyqXNS8wqJv8TrjLqrJAx-xNCQcCUmu30QI_Q.webp&imgrefurl=https%3A%2F%2Fnamu.wiki%2Fw%2F%25EA%25B4%2580%25EC%2583%2581(%25EC%2598%2581%25ED%2599%2594)&docid=F_KxY1RZALHzeM&tbnid=MT6kY-72CZhzMM&vet=12ahUKEwiBpNCrq5eHAxXmoa8BHXGHBiAQM3oECGMQAA..i&w=678&h=971&hcb=2&ved=2ahUKEwiBpNCrq5eHAxXmoa8BHXGHBiAQM3oECGMQAA'; // 대체 이미지 URL
+  final ResultResponseDto result;
+  final String imgPath;
 
   void _launchURL(String url) async {
     if (await canLaunchUrl(Uri.parse(url))) {
@@ -14,6 +17,8 @@ class ResultScreen extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
+
+  ResultScreen(this.result,this.imgPath);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class ResultScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: Image.network(
-                imageUrl,
+                result.predictedJob1Image!,
                 width: 150,
                 height: 150,
                 fit: BoxFit.cover,
@@ -41,17 +46,48 @@ class ResultScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              '직업 추천 텍스트 1',
-              style: TextStyle(fontSize: 16),
+              '${result.predictedJob1} 입니다..!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Text(
-              '직업 추천 텍스트 2',
-              style: TextStyle(fontSize: 16),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "2순위 : ${result.predictedJob2}",
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(width: 20),
+                ClipOval(
+                  child: Image.network(
+                    result.predictedJob2Image!,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '직업 추천 텍스트 3',
-              style: TextStyle(fontSize: 16),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "3순위 : ${result.predictedJob3}",
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(width: 20),
+                ClipOval(
+                  child: Image.network(
+                    result.predictedJob3Image!,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
             ),
+            
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

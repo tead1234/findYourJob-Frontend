@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kwansang/bloc/waiting/waiting_bloc.dart';
 import 'package:kwansang/bloc/waiting/waiting_event.dart';
-import 'package:kwansang/screens/result_screen.dart';
 import 'package:kwansang/screens/waiting_screen.dart';
 import '../bloc/home/home_bloc.dart';
 import '../bloc/home/home_event.dart';
@@ -270,17 +269,17 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Route _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => ResultScreen(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
-    );
-  }
+  // Route _createRoute() {
+  //   return PageRouteBuilder(
+  //     pageBuilder: (context, animation, secondaryAnimation) => ResultScreen(),
+  //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  //       return FadeTransition(
+  //         opacity: animation,
+  //         child: child,
+  //       );
+  //     },
+  //   );
+  // }
 
   Route _createRouteToLoadingScreen(
       String imgPath, Uint8List? imgBytes, String gender, bool agreeYn) {
