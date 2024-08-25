@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -77,6 +78,30 @@ class ResultScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 10,),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'Production : Team CHUIIICK .\n',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.black,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'About us',
+                    style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 10,
+                    ),
+                    recognizer: TapGestureRecognizer()..onTap = () {
+                      // onTap Event
+                      _launchURL('https://www.notion.so/jpko123/ai-8c608989719a4afd8b77cdbbfaa3ccb1');
+                    },
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
