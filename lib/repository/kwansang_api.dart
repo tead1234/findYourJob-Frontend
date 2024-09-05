@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:kwansang/data/models/result_response_dto.dart';
 
 class KwansangApi {
   final dio = Dio();
@@ -28,8 +30,12 @@ class KwansangApi {
     });
 
     log("uploadUserProfileImage Start");
+    if(kDebugMode){
+      await Future.delayed(Duration(seconds: 5));
+      return ResultResponseDto("men", "doctor", "actor", "banker", "https://picsum.photos/id/64/200/200", "https://picsum.photos/id/275/200/200", "https://picsum.photos/id/364/200/200");
+    }
     final response = await dio.post("/requestKwansang", data: formData);
     log("uploadUserProfileImage response $response");
-    return response.data;
+    return ResultResponseDto.fromJson(response.data);
   }
 }
