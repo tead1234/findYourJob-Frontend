@@ -18,24 +18,38 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      initialRoute: "/",
       routes: {
         '/': (context) => RepositoryProvider(
-              create: (context) => KwansangApi(),
-              child: BlocProvider(
-                create: (context) => HomeBloc(context.read<KwansangApi>()),
-                child: HomeScreen(),
-              ),
-            ),
-        '/result': (context) => ResultScreen(
-            ResultResponseDto(
-                "men",
-                "doctor",
-                "actor",
-                "banker",
-                "https://picsum.photos/id/64/200/200",
-                "https://picsum.photos/id/275/200/200",
-                "https://picsum.photos/id/364/200/200"),
-            ""),
+          create: (context) => KwansangApi(),
+          child: BlocProvider(
+            create: (context) => HomeBloc(context.read<KwansangApi>()),
+            child: HomeScreen(),
+          ),
+        ),
+      },
+      onGenerateRoute: (settings) {
+        final settingsUri = Uri.parse(settings.name!);
+        if (settingsUri.path == "/result") {
+          final resultResponseDto =
+            ResultResponseDto.fromMap(settingsUri.queryParameters.map((k,v)=>MapEntry(k, Uri.decodeComponent(v))));
+          log(settingsUri.queryParameters.map((k,v)=>MapEntry(k, Uri.decodeComponent(v))).toString());
+          log(resultResponseDto.predictedJob1Image??"");
+
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                ResultScreen(
+                    resultResponseDto,
+                    "noImg"),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -18,4 +18,13 @@ class ResultResponseDto {
         predictedJob2Image = json["predicted_job2_image"],
         predictedJob3Image = json["predicted_job3_image"];
 
+  ResultResponseDto.fromMap(Map<String, dynamic> json)
+      : predictedGender = json["predictedGender"],
+        predictedJob1 = json["predictedJob1"],
+        predictedJob2 = json["predictedJob2"],
+        predictedJob3 = json["predictedJob3"],
+        predictedJob1Image = json["predictedJob1Image"],
+        predictedJob2Image = json["predictedJob2Image"],
+        predictedJob3Image = json["predictedJob3Image"];
+
 }
