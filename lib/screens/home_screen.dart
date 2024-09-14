@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kwansang/bloc/waiting/waiting_bloc.dart';
@@ -76,12 +78,15 @@ class HomeScreen extends StatelessWidget {
                                 width: 100.0,
                               );
                             } else if (state is ImageLoadSuccess) {
-                              return Image.network(
+                              return kIsWeb ? Image.network(
                                 state.imagePath,
                                 height: 100,
                                 width: 100,
                                 fit: BoxFit.fill,
-                              );
+                              ): Image.file(File(state.imagePath),
+                                height: 100,
+                                width: 100,
+                                fit: BoxFit.fill,);
                             } else {
                               return Icon(Icons.account_circle, size: 100);
                             }

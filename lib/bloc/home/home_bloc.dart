@@ -27,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               source: ImageSource.gallery);
           if (pickedFile != null) {
             imgPath = pickedFile.path;
-            if(kIsWeb) imgBytes = await pickedFile.readAsBytes();
+            imgBytes = await pickedFile.readAsBytes();
             emit(ImageLoadSuccess(pickedFile.path));
           } else {
             emit(ImageLoadFailure());
