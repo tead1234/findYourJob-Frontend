@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kwansang/bloc/waiting/waiting_event.dart';
 import 'package:kwansang/bloc/waiting/waiting_state.dart';
+import 'package:kwansang/data/models/result_response_dto.dart';
 
 import '../../repository/kwansang_api.dart';
 
@@ -23,7 +24,8 @@ class WaitingBloc extends Bloc<WaitingEvent, WaitingState> {
 
         try {
           var resultResponse = await api.uploadUserProfileImage(event.imgPath, event.imgBytes, event.gender, event.agreeYn);
-          emit(FileUploadAndEstimateSuccessState(resultResponse,event.imgPath));
+          log((resultResponse as ResultResponseDto).predictedJob1Image.toString());
+          emit(FileUploadAndEstimateSuccessState(resultResponse as ResultResponseDto,event.imgPath));
         } on Exception catch (e) {
           log("catch error $e");
           emit(FileUploadErrorState());
