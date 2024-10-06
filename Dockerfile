@@ -33,7 +33,7 @@ RUN flutter precache
 WORKDIR /app
 
 # 깃헙 레포지토리 클론
-RUN git clone https://github.com/jibminJung/findYourJob-Frontend.git .
+RUN git clone https://github.com/tead1234/findYourJob-Frontend.git .
 
 # 필요 패키지 설치
 RUN flutter pub get
