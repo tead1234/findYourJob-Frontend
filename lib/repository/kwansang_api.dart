@@ -8,6 +8,8 @@ import 'package:http_parser/http_parser.dart';
 import 'package:kwansang/data/models/result_response_dto.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../constants.dart';
+
 class KwansangApi {
   final dio = Dio();
 
@@ -16,7 +18,7 @@ class KwansangApi {
   }
 
   void configureDio() {
-    dio.options.baseUrl = 'http://54.180.9.96:8000';
+    dio.options.baseUrl = Constants.baseUrl;
     dio.options.connectTimeout = Duration(seconds: 5);
     dio.options.receiveTimeout = Duration(seconds: 3);
     dio.interceptors.add(PrettyDioLogger(
@@ -28,7 +30,7 @@ class KwansangApi {
         compact: true,
         maxWidth: 90,
         enabled: kDebugMode));
-
+    log(dio.options.baseUrl);
   }
 
   Future<dynamic> uploadUserProfileImage(
