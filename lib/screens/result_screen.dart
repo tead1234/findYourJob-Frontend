@@ -10,6 +10,8 @@ import 'package:kwansang/data/models/result_response_dto.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../constants.dart';
+
 class ResultScreen extends StatelessWidget {
 
   final ResultResponseDto result;
@@ -61,7 +63,7 @@ class ResultScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Image.network(
-                    'http://54.180.9.96:8000/${result.predictedJob1Image}',
+                    '${Constants.baseUrl}/${result.predictedJob1Image}',
                     // imgPath,
                     width: 150,
                     height: 150,
@@ -86,7 +88,7 @@ class ResultScreen extends StatelessWidget {
                 SizedBox(width: 20),
                 ClipOval(
                   child: Image.network(
-                    'http://54.180.9.96:8000/${result.predictedJob2Image}',
+                    '${Constants.baseUrl}/${result.predictedJob2Image}',
                     width: 50,
                     height: 50,
                     fit: BoxFit.cover,
@@ -105,7 +107,7 @@ class ResultScreen extends StatelessWidget {
                 SizedBox(width: 20),
                 ClipOval(
                   child: Image.network(
-                    'http://54.180.9.96:8000/${result.predictedJob3Image}',
+                    '${Constants.baseUrl}/${result.predictedJob3Image}',
                     width: 50,
                     height: 50,
                     fit: BoxFit.cover,
