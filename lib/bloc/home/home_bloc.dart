@@ -43,6 +43,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }
         emit(RadioState(isSelected));
       } else if (event is AgreeCheckClicked) {
+        agreeYn = event.selectedValue;
         emit(AgreeState(event.selectedValue));
       } else if (event is RequestClicked) {
         log("Request event !");
