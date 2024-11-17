@@ -78,6 +78,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/kwansangimage.jpg
 #    - assets/title.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

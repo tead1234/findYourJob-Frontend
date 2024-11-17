@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -7,7 +8,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kwansang/data/models/result_response_dto.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
@@ -32,6 +32,7 @@ class ResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('관상 직업 추천'),
+        leading: BackButton(onPressed: (){Navigator.popUntil(context, ModalRoute.withName("/"));},),
       ),
       body: Center(
         child: Column(
@@ -127,13 +128,18 @@ class ResultScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    final queryParam = "predictedJob1=${result.predictedJob1}&predictedJob1Image=${result.predictedJob1Image}";
+                    final job1Encode = utf8.encode(result.predictedJob1??'');
+                    final job2Encode = utf8.encode(result.predictedJob2??'');
+                    final job3Encode = utf8.encode(result.predictedJob3??'');
+                    final queryParam = "predictedJob1=${job1Encode}&predictedJob1Image=${result.predictedJob1Image}&predictedJob2=${job2Encode}&predictedJob2Image=${result.predictedJob2Image}&predictedJob3=${job3Encode}&predictedJob3Image=${result.predictedJob3Image}";
                     final encodedParam = Uri.encodeComponent(queryParam);
                     var uri = kIsWeb?"${Uri.base.origin}/#/result?${encodedParam}":"/#/result?${encodedParam}";
-
+                    const subject = 'ai가 본 친구의 관상을 확인해보세요!\n\n';
                     Clipboard.setData(ClipboardData(text: uri));
 
-                    Share.share(uri, subject: 'ai가 본 친구의 관상을 확인해보세요!');
+                    launchUrl(Uri.parse('sms:&body=$subject$uri'));
+
+                    //Share.share(uri, subject: 'ai가 본 친구의 관상을 확인해보세요!');
                   },
                   child: Row(
                     children: [
