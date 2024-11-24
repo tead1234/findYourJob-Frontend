@@ -87,11 +87,13 @@ class ResultScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(width: 20),
-                ClipOval(
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
                   child: Image.network(
                     '${Constants.baseUrl}/${result.predictedJob2Image}',
-                    width: 50,
-                    height: 50,
+                    // imgPath,
+                    width: 150,
+                    height: 150,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -106,11 +108,13 @@ class ResultScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(width: 20),
-                ClipOval(
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
                   child: Image.network(
                     '${Constants.baseUrl}/${result.predictedJob3Image}',
-                    width: 50,
-                    height: 50,
+                    // imgPath,
+                    width: 150,
+                    height: 150,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -127,19 +131,27 @@ class ResultScreen extends StatelessWidget {
                       color: Colors.red,
                     ),
                   ),
-                  onPressed: () {
-                    final job1Encode = utf8.encode(result.predictedJob1??'');
-                    final job2Encode = utf8.encode(result.predictedJob2??'');
-                    final job3Encode = utf8.encode(result.predictedJob3??'');
+                  onPressed: () async {
+                    // 직업명 urf-8 인코딩 및 '_' 로 연결한 스트링으로 저장
+                    final job1Encode = utf8.encode(result.predictedJob1??'').join('_');
+                    final job2Encode = utf8.encode(result.predictedJob2??'').join('_');
+                    final job3Encode = utf8.encode(result.predictedJob3??'').join('_');
                     final queryParam = "predictedJob1=${job1Encode}&predictedJob1Image=${result.predictedJob1Image}&predictedJob2=${job2Encode}&predictedJob2Image=${result.predictedJob2Image}&predictedJob3=${job3Encode}&predictedJob3Image=${result.predictedJob3Image}";
                     final encodedParam = Uri.encodeComponent(queryParam);
-                    var uri = kIsWeb?"${Uri.base.origin}/#/result?${encodedParam}":"/#/result?${encodedParam}";
+                    var uri = kIsWeb?"${Uri.base.origin}/#/result?${queryParam}":"/#/result?${queryParam}";
+                    // var uri = kIsWeb?"http://iwillguessyourjob.uno/#/result?${encodedParam}":"/#/result?${encodedParam}";
                     const subject = 'ai가 본 친구의 관상을 확인해보세요!\n\n';
+
+                    //클립보드에 복사
                     Clipboard.setData(ClipboardData(text: uri));
 
-                    launchUrl(Uri.parse('sms:&body=$subject$uri'));
+                    //짧은 url 생성
+                    // var shortUrl = await bitlyApi.getShortUrl(uri);
 
-                    //Share.share(uri, subject: 'ai가 본 친구의 관상을 확인해보세요!');
+                    //uri encode
+                    uri = Uri.encodeComponent(uri);
+
+                    launchUrl(Uri(scheme: "sms",path:'&body="$subject$uri"'));
                   },
                   child: Row(
                     children: [
