@@ -31,12 +31,17 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (settings) {
         final settingsUri = Uri.parse(settings.name!);
+        log('sdfikuhsaf');
+        log(settingsUri.queryParameters
+            .map((k, v) => MapEntry(k, Uri.decodeComponent(v)))
+            .toString());
         if (settingsUri.path == "/result") {
           final resultResponseDto =
               ResultResponseDto.fromMap(settingsUri.queryParameters.map((k, v) {
             if (k == 'predictedJob1' || k == 'predictedJob2' || k == 'predictedJob3') {
               return MapEntry(k,
-                  utf8.decode(json.decode(Uri.decodeComponent(v)).cast<int>()));
+                  // utf8.decode(json.decode(Uri.decodeComponent(v).split('_')).cast<int>()));,
+                utf8.decode(v.split('_').map((v)=>int.parse(v)).toList()));
             }
             else {
               return MapEntry(k, Uri.decodeComponent(v));
