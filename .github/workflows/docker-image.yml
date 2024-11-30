@@ -1,0 +1,15 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build --build-arg url_input=http://15.164.123.236:8000 -t findyourjob:frontend .
+    - name: Run Docker container
+      run: docker run -p 80:80 --name findyourjob_frontend -d --rm findyourjob:frontend
