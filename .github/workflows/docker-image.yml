@@ -17,7 +17,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Python 3.9 사용
       - name: Setup AWS CLI
         uses: sagarsthorat/aws-cli@v1
         with:
