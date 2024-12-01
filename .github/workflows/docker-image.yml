@@ -18,14 +18,12 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build --build-arg url_input=http://15.164.123.236:8000 -t findyourjob:frontend .
-    - name: Run Docker container
-      run: docker run -p 80:80 --name findyourjob_frontend -d --rm findyourjob:frontend
     - name: AWS 인증하기
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-region: ${{ env.AWS_REGION }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
     - name: AWS Lightsail에 연결되었는지 확인
       run: aws configure list
 
