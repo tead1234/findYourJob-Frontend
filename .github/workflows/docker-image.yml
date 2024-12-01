@@ -16,10 +16,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build --build-arg url_input=http://15.164.123.236:8000 -t findyourjob:frontend .
     - name: AWS 인증하기
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@master
       with:
         aws-region: ${{ env.AWS_REGION }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
