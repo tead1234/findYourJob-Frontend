@@ -15,8 +15,8 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     permissions:
-      id-token: write   # OIDC 인증을 위해 필요
-      contents: read    # 코드 체크아웃을 위해 필요
+      id-token: write
+      contents: write   # 코드 체크아웃을 위해 필요
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
