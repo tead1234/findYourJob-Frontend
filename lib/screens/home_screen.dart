@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.network(
+                    Image.asset(
                       'assets/kwansangimage.jpg',
                       width: 250,
                       //height: 300,
