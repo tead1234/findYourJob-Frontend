@@ -24,7 +24,7 @@ jobs:
           region: ${{ env.AWS_REGION }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-cli-version: latest
+          aws-cli-version: 1.7.29
           output-format: json
       - name: AWS Lightsail에 연결되었는지 확인
         run: aws configure list
